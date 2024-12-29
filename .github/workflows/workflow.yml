@@ -9,5 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-      container: python:3.9-slim
+    container: python:3.9-slim
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: | 
+          python3.8 -m pip install --upgrade pip
+          pip3 install -r requirements.txt
+
+      - name: Run unit tests with nose
+        run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
 
